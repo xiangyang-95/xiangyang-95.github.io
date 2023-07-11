@@ -2,3 +2,14 @@ baseURL = 'https://xiangyang-95.github.io/'
 languageCode = 'en-us'
 title = 'DeepRobotics'
 theme = 'PaperMod'
+
+[Params]
+  env = 'production' # to enable google analytics, opengraph, twitter-cards and schema.
+  title = 'DeepRobotics'
+  description = 'I am a robotics and deep learning enthusiast, dedicated to exploring the cutting-edge advancements in artificial intelligence and its application in the world of robotics'
+  keywords = ['Robotics', 'Deep Learning', 'Computer Vision']
+  author = 'Me'
+  images = ["<link or path of image for opengraph, twitter-cards>"]
+  DateFormat = "January 2, 2006"
+  defaultTheme = 'dark' # dark, light
+  disableThemeToggle = 'true'
