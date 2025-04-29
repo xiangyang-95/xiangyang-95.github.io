@@ -457,20 +457,124 @@ footer p::before {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+    }
+    
     .contact-info {
         flex-direction: column;
         align-items: center;
+        gap: 0.5rem;
+        margin-left: 0;
     }
     
-    .job-meta, .edu-meta {
-        flex-direction: column;
+    .contact-info p {
+        margin-left: 0;
+        font-size: 0.9rem;
     }
     
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    header h1::before, header h1::after {
+        font-size: 1.5rem;
+    }
+    
+    /* Responsive navigation */
     nav ul {
         flex-wrap: wrap;
+        justify-content: center;
     }
     
+    nav li {
+        padding: 0.5rem;
+    }
+    
+    /* Adjustments for job and education sections */
+    .job-meta, .edu-meta {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    .job, .education-item {
+        padding: 1rem;
+    }
+    
+    .job ul {
+        padding-left: 1.2rem;
+    }
+    
+    /* Make terminal elements more mobile-friendly */
+    .terminal-buttons {
+        gap: 12px;
+    }
+    
+    .terminal-button {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .code-block {
+        padding: 1rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Make the terminal prompt work better on mobile */
     .terminal-prompt {
-        display: none;
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+    
+    /* Make the section headers more readable on mobile */
+    .section h2 {
+        font-size: 1.4rem;
+    }
+    
+    .section h2::before, .section h2::after {
+        font-size: 1.2rem;
+    }
+}
+
+/* Small phone screens */
+@media (max-width: 480px) {
+    nav ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav li {
+        padding: 0.4rem;
+    }
+    
+    nav a {
+        font-size: 0.9rem;
+        padding: 3px 6px;
+    }
+    
+    .job h3, .education-item h3 {
+        font-size: 1.1rem;
+    }
+    
+    .contact-info::before {
+        font-size: 1rem;
+    }
+    
+    .terminal-title {
+        font-size: 0.8rem;
+    }
+    
+    /* Make the code blocks scrollable horizontally */
+    pre {
+        overflow-x: auto;
+        white-space: pre;
+        word-wrap: normal;
+    }
+    
+    .line-number {
+        min-width: 20px;
+        padding-right: 0.5rem;
     }
 }

@@ -1,7 +1,10 @@
 // Update the current year in the footer
 document.getElementById('current-year').textContent = new Date().getFullYear();
 
-// Smooth scrolling for navigation links
+// Add mobile detection
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+
+// Smooth scrolling for navigation links with improved mobile handling
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -9,14 +12,21 @@ document.querySelectorAll('nav a').forEach(anchor => {
         const targetId = this.getAttribute('href');
         const targetElement = document.querySelector(targetId);
         
-        window.scrollTo({
-            top: targetElement.offsetTop - 60,
-            behavior: 'smooth'
-        });
+        if (targetElement) {
+            // Use a smaller offset on mobile devices
+            const headerOffset = isMobile ? 20 : 60;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
     });
 });
 
-// Add active class to navigation items when scrolling
+// Add active class to navigation items when scrolling with improved mobile handling
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('.section');
     const navLinks = document.querySelectorAll('nav a');
@@ -26,8 +36,10 @@ window.addEventListener('scroll', () => {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
+        // Use a different threshold for mobile
+        const scrollOffset = isMobile ? 100 : 200;
         
-        if (pageYOffset >= (sectionTop - 200)) {
+        if (pageYOffset >= (sectionTop - scrollOffset)) {
             currentSection = section.getAttribute('id');
         }
     });
@@ -211,9 +223,17 @@ function activateEasterEgg() {
     });
 }
 
-// Terminal button interactions
+// Terminal button interactions with improved touch support
 document.querySelectorAll('.terminal-button').forEach(button => {
-    button.addEventListener('click', function() {
+    // Use touchstart or click event based on device
+    const eventType = isMobile ? 'touchstart' : 'click';
+    
+    button.addEventListener(eventType, function(e) {
+        // Prevent ghost clicks on mobile
+        if (isMobile) {
+            e.preventDefault();
+        }
+        
         const codeBlock = this.closest('.terminal-header').nextElementSibling;
         
         if (this.classList.contains('terminal-close')) {
@@ -255,17 +275,114 @@ document.querySelectorAll('.terminal-button').forEach(button => {
                 codeBlock.style.left = 'auto';
                 codeBlock.style.width = 'auto';
                 codeBlock.style.height = 'auto';
+                codeBlock.style.transform = 'none';
             } else {
-                // Maximize
+                // Maximize with special handling for mobile
                 codeBlock.style.position = 'fixed';
                 codeBlock.style.zIndex = '1000';
                 codeBlock.style.top = '50%';
                 codeBlock.style.left = '50%';
                 codeBlock.style.transform = 'translate(-50%, -50%)';
-                codeBlock.style.width = '80%';
-                codeBlock.style.maxHeight = '80vh';
+                
+                // Adjust size based on device
+                if (isMobile) {
+                    codeBlock.style.width = '95%';
+                    codeBlock.style.maxHeight = '70vh';
+                } else {
+                    codeBlock.style.width = '80%';
+                    codeBlock.style.maxHeight = '80vh';
+                }
+                
                 codeBlock.style.overflow = 'auto';
+                
+                // Add a close button for mobile
+                if (isMobile && !document.querySelector('.mobile-close-btn')) {
+                    const closeBtn = document.createElement('div');
+                    closeBtn.classList.add('mobile-close-btn');
+                    closeBtn.style.position = 'absolute';
+                    closeBtn.style.top = '10px';
+                    closeBtn.style.right = '10px';
+                    closeBtn.style.backgroundColor = '#ff5f56';
+                    closeBtn.style.width = '24px';
+                    closeBtn.style.height = '24px';
+                    closeBtn.style.borderRadius = '50%';
+                    closeBtn.style.cursor = 'pointer';
+                    closeBtn.style.zIndex = '1001';
+                    
+                    closeBtn.addEventListener('touchstart', function(event) {
+                        event.preventDefault();
+                        codeBlock.style.position = 'relative';
+                        codeBlock.style.zIndex = 'auto';
+                        codeBlock.style.top = 'auto';
+                        codeBlock.style.left = 'auto';
+                        codeBlock.style.width = 'auto';
+                        codeBlock.style.height = 'auto';
+                        codeBlock.style.transform = 'none';
+                        this.remove();
+                    });
+                    
+                    codeBlock.appendChild(closeBtn);
+                }
             }
         }
     });
+    
+    // Add better touch targets for mobile
+    if (isMobile) {
+        button.style.width = '24px';
+        button.style.height = '24px';
+    }
 });
+
+// Make pre code blocks horizontally scrollable on mobile
+document.querySelectorAll('pre').forEach(pre => {
+    pre.style.overflowX = 'auto';
+    pre.style.webkitOverflowScrolling = 'touch';
+});
+
+// Add swipe detection for terminal navigation on mobile
+if (isMobile) {
+    // Hide the terminal prompt on mobile by default, can be toggled
+    const terminalPrompt = document.querySelector('.terminal-prompt');
+    if (terminalPrompt) {
+        terminalPrompt.style.display = 'none';
+        
+        // Add a button to toggle terminal visibility
+        const toggleBtn = document.createElement('button');
+        toggleBtn.textContent = 'Show Terminal';
+        toggleBtn.style.position = 'fixed';
+        toggleBtn.style.bottom = '10px';
+        toggleBtn.style.right = '10px';
+        toggleBtn.style.zIndex = '999';
+        toggleBtn.style.backgroundColor = '#4b8bbe';
+        toggleBtn.style.color = 'white';
+        toggleBtn.style.border = 'none';
+        toggleBtn.style.borderRadius = '4px';
+        toggleBtn.style.padding = '8px 12px';
+        toggleBtn.style.fontSize = '14px';
+        
+        toggleBtn.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            if (terminalPrompt.style.display === 'none') {
+                terminalPrompt.style.display = 'flex';
+                this.textContent = 'Hide Terminal';
+            } else {
+                terminalPrompt.style.display = 'none';
+                this.textContent = 'Show Terminal';
+            }
+        });
+        
+        document.body.appendChild(toggleBtn);
+    }
+    
+    // Add meta viewport tag if not already present
+    if (!document.querySelector('meta[name="viewport"]')) {
+        const metaTag = document.createElement('meta');
+        metaTag.name = 'viewport';
+        metaTag.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+        document.head.appendChild(metaTag);
+    }
+    
+    // Improve scrolling behavior for iOS devices
+    document.documentElement.style.webkitOverflowScrolling = 'touch';
+}
