@@ -3,6 +3,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 :root {
@@ -83,6 +85,7 @@ a:hover {
     font-size: 0.9rem;
 }
 
+/* Code blocks and text content */
 .code-block {
     background-color: #2d2d2d;
     border-radius: 0 0 6px 6px;
@@ -91,10 +94,24 @@ a:hover {
     position: relative;
     border-left: 3px solid var(--highlight-color);
     margin-bottom: 2rem;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-x: auto;
+}
+
+code {
+    max-width: 100%;
+    display: inline-block;
 }
 
 .code-line {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .line-number {
@@ -457,28 +474,38 @@ footer p::before {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    
     .container {
         padding: 0 10px;
+        width: 100%;
+        overflow-x: hidden;
     }
     
     .contact-info {
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         gap: 0.5rem;
         margin-left: 0;
+        width: 100%;
     }
     
     .contact-info p {
         margin-left: 0;
         font-size: 0.9rem;
+        width: 100%;
+        text-align: left;
+        padding-left: 20px;
     }
     
     header h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     header h1::before, header h1::after {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     
     /* Responsive navigation */
@@ -488,10 +515,22 @@ footer p::before {
     }
     
     nav li {
-        padding: 0.5rem;
+        padding: 0.5rem 0.3rem;
     }
     
-    /* Adjustments for job and education sections */
+    nav a {
+        font-size: 0.9rem;
+        padding: 5px 8px;
+    }
+    
+    /* Improve text wrapping in job items */
+    .job li, .education-item li, .achievements-list li {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
+    
     .job-meta, .edu-meta {
         flex-direction: column;
         gap: 0.3rem;
@@ -505,76 +544,131 @@ footer p::before {
         padding-left: 1.2rem;
     }
     
-    /* Make terminal elements more mobile-friendly */
-    .terminal-buttons {
-        gap: 12px;
-    }
-    
-    .terminal-button {
-        width: 16px;
-        height: 16px;
-    }
-    
+    /* Make code blocks better on mobile */
     .code-block {
-        padding: 1rem;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    /* Make the terminal prompt work better on mobile */
-    .terminal-prompt {
+        padding: 0.75rem;
         font-size: 0.8rem;
-        padding: 8px 10px;
+        line-height: 1.3;
     }
     
-    /* Make the section headers more readable on mobile */
+    pre {
+        font-size: 0.8rem;
+    }
+    
+    /* Improve section titles for mobile */
     .section h2 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+        word-break: keep-all;
+        white-space: nowrap;
     }
     
     .section h2::before, .section h2::after {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
     }
 }
 
 /* Small phone screens */
 @media (max-width: 480px) {
-    nav ul {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+    body {
+        font-size: 13px;
+    }
+    
+    .container {
+        padding: 0 8px;
     }
     
     nav li {
-        padding: 0.4rem;
+        padding: 0.3rem 0.2rem;
     }
     
     nav a {
-        font-size: 0.9rem;
-        padding: 3px 6px;
+        font-size: 0.8rem;
+        padding: 3px 5px;
+    }
+    
+    header h1 {
+        font-size: 1.4rem;
+    }
+    
+    header h1::before, header h1::after {
+        font-size: 1.2rem;
     }
     
     .job h3, .education-item h3 {
-        font-size: 1.1rem;
-    }
-    
-    .contact-info::before {
         font-size: 1rem;
     }
     
+    .contact-info::before {
+        font-size: 0.9rem;
+    }
+    
     .terminal-title {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
     }
     
-    /* Make the code blocks scrollable horizontally */
+    /* Smaller text for job descriptions */
+    .job li {
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Adjust code blocks for very small screens */
+    .code-block {
+        padding: 0.5rem;
+        font-size: 0.7rem;
+    }
+    
     pre {
-        overflow-x: auto;
-        white-space: pre;
-        word-wrap: normal;
+        font-size: 0.7rem;
     }
     
+    /* Hide decorative elements that take space */
+    .job::before, .education-item::before {
+        display: none;
+    }
+    
+    /* Make the line numbers smaller */
     .line-number {
-        min-width: 20px;
-        padding-right: 0.5rem;
+        min-width: 18px;
+        padding-right: 0.3rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* Ultra small screens */
+@media (max-width: 320px) {
+    body {
+        font-size: 12px;
+    }
+    
+    .section h2::before, .section h2::after {
+        content: none;
+    }
+    
+    .contact-info::before {
+        content: none;
+    }
+    
+    header h1::before, header h1::after {
+        content: none;
+    }
+    
+    nav a::before {
+        content: none;
+    }
+    
+    /* Stack navigation items for ultra small screens */
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .code-block {
+        font-size: 0.65rem;
+    }
+    
+    /* Further reduce line height */
+    .job li, .education-item li, .achievements-list li {
+        line-height: 1.3;
     }
 }
