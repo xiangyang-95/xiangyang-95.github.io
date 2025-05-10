@@ -4,7 +4,7 @@ document.getElementById('current-year').textContent = new Date().getFullYear();
 // Add mobile detection
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
 
-// Smooth scrolling for navigation links with improved mobile handling
+// Smooth scrolling for navigation links
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -13,7 +13,6 @@ document.querySelectorAll('nav a').forEach(anchor => {
         const targetElement = document.querySelector(targetId);
         
         if (targetElement) {
-            // Use a smaller offset on mobile devices
             const headerOffset = isMobile ? 20 : 60;
             const elementPosition = targetElement.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -26,7 +25,7 @@ document.querySelectorAll('nav a').forEach(anchor => {
     });
 });
 
-// Add active class to navigation items when scrolling with improved mobile handling
+// Add active class to navigation items when scrolling
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('.section');
     const navLinks = document.querySelectorAll('nav a');
@@ -36,7 +35,6 @@ window.addEventListener('scroll', () => {
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        // Use a different threshold for mobile
         const scrollOffset = isMobile ? 100 : 200;
         
         if (pageYOffset >= (sectionTop - scrollOffset)) {
@@ -51,29 +49,6 @@ window.addEventListener('scroll', () => {
         }
     });
 });
-
-// Terminal functionality
-const terminalTextElement = document.querySelector('.terminal-prompt .prompt-symbol');
-const cursorElement = document.querySelector('.blinking-cursor');
-
-// Simulate typing in the terminal with Python commands
-const possibleCommands = [
-    'python3 hire_me.py',
-    'pip install professional-skills',
-    'python -m profile.show_skills',
-    'from resume import Experience',
-    'python -c "import resume; print(resume.contact())"',
-    'cat about.py | python',
-    'python -m venv new_opportunity',
-    'git clone https://github.com/xiangyang-95/ai-projects.git',
-    'sudo apt-get install success',
-    'python3 hire_me.py'
-];
-
-let currentCommandIndex = 0;
-let isErasing = false;
-let currentText = 'python3 hire_me.py';
-let charIndex = currentText.length;
 
 // Start with "python3 hire_me.py" already typed
 setTimeout(() => {

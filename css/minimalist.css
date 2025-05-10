@@ -1,0 +1,525 @@
+/* True minimalist design */
+:root {
+    /* Modern, elegant color palette */
+    --bg-color: #fafafa;          /* Slightly off-white background */
+    --text-color: #2d3748;        /* Dark slate for better readability */
+    --heading-color: #1a202c;     /* Darker slate for headings */
+    --accent-color: #5a67d8;      /* Indigo accent - professional yet distinctive */
+    --accent-light: #c3dafe;      /* Light indigo for subtle details */
+    --muted-color: #718096;       /* Medium slate gray for secondary text */
+    --subtle-bg: #f7fafc;         /* Very light blue-gray for section backgrounds */
+    --border-color: #e2e8f0;      /* Light gray border color */
+    --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    --hover-bg: #edf2f7;          /* Light gray for hover states */
+}
+
+/* Clean typography */
+body {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* Clean, centered container */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Simple section styling */
+.section {
+    padding: 4rem 0;
+    margin-bottom: 1rem;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Clean headings */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(120deg, var(--accent-color), #805ad5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+h2 {
+    font-size: 1.75rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), #805ad5);
+}
+
+h3 {
+    font-size: 1.25rem;
+}
+
+/* Clean paragraph styling */
+p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+}
+
+/* Clean links */
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #805ad5;
+}
+
+/* Simple header */
+header {
+    padding: 3rem 0;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2.25rem;
+}
+
+header p {
+    color: var(--muted-color);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.contact-info p {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted-color);
+}
+
+.contact-info i {
+    color: var(--accent-color);
+}
+
+/* Clean navigation */
+nav {
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    padding: 0;
+    margin: 0;
+}
+
+nav a {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+nav a:hover, nav a.active {
+    color: var(--accent-color);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), #805ad5);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+nav a:hover::after, nav a.active::after {
+    width: 50%;
+}
+
+/* Job and education cards */
+.job, .education-item {
+    margin-bottom: 2.5rem;
+    padding: 2rem;
+    background-color: var(--subtle-bg);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 3px solid var(--accent-color);
+}
+
+.job:hover, .education-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.job-header, .edu-meta {
+    margin-bottom: 1rem;
+}
+
+.job h3, .education-item h3 {
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+.job-meta, .edu-meta {
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted-color);
+    font-size: 0.9rem;
+}
+
+.job ul {
+    padding-left: 1.2rem;
+}
+
+.job li {
+    margin-bottom: 0.75rem;
+}
+
+/* About card styling */
+.about-card {
+    background-color: var(--subtle-bg);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.about-text {
+    margin-top: 1rem;
+}
+
+.about-text p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.expertise-areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.expertise-item {
+    background-color: white;
+    padding: 1.75rem;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.expertise-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent-color), #805ad5);
+}
+
+.expertise-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(90, 103, 216, 0.15);
+}
+
+.expertise-item h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--accent-color);
+}
+
+.expertise-item p {
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* Clean achievements list */
+.achievements-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.achievements-list li {
+    margin-bottom: 1.25rem;
+    padding: 1.5rem;
+    background-color: var(--subtle-bg);
+    border-radius: 8px;
+    position: relative;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+    border-left: 3px solid #805ad5; /* Secondary accent color */
+}
+
+.achievements-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Simple skills display */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-category {
+    margin-bottom: 2rem;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+    transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.skill-category h3 {
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.skill-category h3::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), #805ad5);
+}
+
+.skill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.skill-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.skill-list li:hover {
+    padding-left: 5px;
+    color: var(--accent-color);
+}
+
+/* Simple footer */
+footer {
+    padding: 2.5rem 0;
+    background-color: var(--subtle-bg);
+    text-align: center;
+    color: var(--muted-color);
+    font-size: 0.9rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    border-top: 1px solid var(--border-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    header {
+        padding: 2rem 0;
+    }
+    
+    .contact-info {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .job, .education-item {
+        padding: 1.5rem;
+    }
+    
+    .job-meta, .edu-meta {
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .expertise-areas {
+        grid-template-columns: 1fr;
+    }
+    
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        padding: 3rem 0;
+    }
+    
+    nav a {
+        padding: 0.75rem 0.85rem;
+        font-size: 0.9rem;
+    }
+    
+    .job, .education-item, .about-card, .expertise-item, .achievements-list li, .skill-category {
+        padding: 1.25rem;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.35rem;
+    }
+    
+    nav a::after {
+        display: none; /* Hide underline animation on very small screens */
+    }
+}
+
+/* Add some subtle hover effects and transitions */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Add a subtle scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #805ad5; /* Secondary accent */
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Apply animations to sections */
+.section {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Prevent conflict with responsive hover effects */
+@media (max-width: 767px) {
+    .job:hover, .education-item:hover, .about-card:hover, 
+    .expertise-item:hover, .achievements-list li:hover, .skill-category:hover {
+        transform: none;
+    }
+}
+
+/* Clean typography */
+body {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+}
+
+/* Clean, centered container */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Add a subtle scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #805ad5; /* Secondary accent */
+}
