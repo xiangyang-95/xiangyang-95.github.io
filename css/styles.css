@@ -1,674 +1,218 @@
-/* Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-:root {
-    --bg-color: #282c34;         /* Python IDE-like dark background */
-    --text-color: #f8f8f2;        /* Light text */
-    --highlight-color: #4b8bbe;   /* Python blue */
-    --comment-color: #8d9eb3;     /* Grey for comments */
-    --function-color: #ffac6d;    /* Orange-ish for functions */
-    --string-color: #79b8ff;      /* Light blue for strings */
-    --variable-color: #a9dc76;    /* Green for variables */
-    --keyword-color: #ff79c6;     /* Pink for keywords */
-    --terminal-color: #1d1f21;    /* Terminal background */
-    --line-number-color: #858585; /* Line number color */
-    --class-color: #ffd866;       /* Yellow for classes */
-    --decorator-color: #e83e8c;   /* Magenta for decorators */
-}
-
-body {
-    font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--bg-color);
-    padding-bottom: 60px; /* For terminal at bottom */
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-a {
-    color: var(--highlight-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--string-color);
-    text-decoration: none;
-}
-
-/* Terminal-like elements */
-.terminal-header {
-    display: flex;
-    background-color: #333;
-    border-radius: 6px 6px 0 0;
-    padding: 8px 15px;
-}
-
-.terminal-buttons {
-    display: flex;
-    gap: 8px;
-}
-
-.terminal-button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.terminal-close {
-    background-color: #ff5f56;
-}
-
-.terminal-minimize {
-    background-color: #ffbd2e;
-}
-
-.terminal-maximize {
-    background-color: #27c93f;
-}
-
-.terminal-title {
-    flex-grow: 1;
-    text-align: center;
-    color: #aaa;
-    font-size: 0.9rem;
-}
-
-/* Code blocks and text content */
-.code-block {
-    background-color: #2d2d2d;
-    border-radius: 0 0 6px 6px;
-    padding: 1.5rem;
-    font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    position: relative;
-    border-left: 3px solid var(--highlight-color);
-    margin-bottom: 2rem;
-    overflow-x: auto;
-    max-width: 100%;
-}
-
-pre {
-    white-space: pre-wrap;
-    word-break: break-word;
-    overflow-x: auto;
-}
-
-code {
-    max-width: 100%;
-    display: inline-block;
-}
-
-.code-line {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.line-number {
-    color: var(--line-number-color);
-    min-width: 30px;
-    text-align: right;
-    padding-right: 1rem;
-    user-select: none;
-}
-
-/* Header Styles */
-header {
-    background-color: var(--terminal-color);
-    color: var(--text-color);
-    padding: 2rem 0;
-    text-align: center;
-    border-bottom: 1px solid #444;
-}
-
-header h1 {
-    margin-bottom: 0.5rem;
-    font-size: 2.5rem;
-    color: var(--class-color);
-}
-
-header h1::before {
-    content: "class ";
-    color: var(--keyword-color);
-    font-size: 2rem;
-}
-
-header h1::after {
-    content: ":";
-    color: var(--text-color);
-    font-size: 2rem;
-}
-
-.contact-info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    padding-bottom: 1rem;
-}
-
-.contact-info::before {
-    content: "    def __init__(self):";
-    display: block;
-    width: 100%;
-    text-align: center;
-    color: var(--function-color);
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.contact-info p {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-left: 2.5rem;
-}
-
-.contact-info i {
-    color: var(--highlight-color);
-}
-
-.contact-info a {
-    color: var(--string-color);
-    position: relative;
-}
-
-.contact-info a::before {
-    content: "'";
-    color: var(--string-color);
-}
-
-.contact-info a::after {
-    content: "'";
-    color: var(--string-color);
-}
-
-/* Navigation Styles */
-nav {
-    background-color: #252526;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 1px solid #444;
-}
-
-nav ul {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-}
-
-nav li {
-    padding: 1rem;
-    position: relative;
-}
-
-nav a {
-    color: var(--variable-color);
-    font-weight: 500;
-    position: relative;
-    padding: 5px 10px;
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-
-nav a:hover {
-    background-color: #333;
-    color: var(--highlight-color);
-}
-
-nav a.active {
-    background-color: #333;
-    color: var(--highlight-color);
-}
-
-nav a::before {
-    content: "#";
-    margin-right: 5px;
-    font-size: 0.8em;
-    opacity: 0.7;
-}
-
-/* Section Styles */
-.section {
-    padding: 3rem 0;
-    position: relative;
-}
-
-.section::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 1px;
-    background: linear-gradient(to bottom, transparent, var(--highlight-color), transparent);
-}
-
-.section h2 {
-    text-align: left;
-    margin-bottom: 2rem;
-    color: var(--function-color);
-    position: relative;
-    display: inline-block;
-    padding-bottom: 0.5rem;
-}
-
-.section h2::before {
-    content: "def ";
-    color: var(--keyword-color);
-    font-weight: normal;
-}
-
-.section h2::after {
-    content: "(self):";
-    color: var(--text-color);
-    font-weight: normal;
-}
-
-/* Experience Styles */
-.job, .education-item {
-    margin-bottom: 2rem;
-    background-color: #2d2d2d;
-    padding: 1.5rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    border-left: 3px solid var(--highlight-color);
-    position: relative;
-}
-
-.job::before, .education-item::before {
-    content: "# Instance";
-    position: absolute;
-    top: -10px;
-    right: 10px;
-    color: var(--comment-color);
-    font-size: 0.8rem;
-}
-
-.job-header, .edu-meta {
-    margin-bottom: 1rem;
-}
-
-.job h3, .education-item h3 {
-    color: var(--class-color);
-    margin-bottom: 0.5rem;
-}
-
-.job h3::before, .education-item h3::before {
-    content: "@dataclass";
-    display: block;
-    color: var(--decorator-color);
-    font-weight: normal;
-    font-size: 0.8em;
-}
-
-.job-meta, .edu-meta {
-    display: flex;
-    justify-content: space-between;
-    color: var(--variable-color);
-    font-style: normal;
-}
-
-.job-meta .company::before, .edu-meta .institution::before {
-    content: "# ";
-    color: var(--comment-color);
-}
-
-.job-meta .dates, .edu-meta .dates {
-    color: var(--comment-color);
-}
-
-.job ul {
-    padding-left: 1.5rem;
-    list-style-type: none;
-}
-
-.job li {
-    margin-bottom: 0.75rem;
-    position: relative;
-}
-
-.job li::before {
-    content: ">";
-    position: absolute;
-    left: -1.2rem;
-    color: var(--highlight-color);
-}
-
-/* Achievements Styles */
-.achievements-list {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.achievements-list li {
-    margin-bottom: 0.75rem;
-    background-color: #2d2d2d;
-    padding: 1rem 1rem 1rem 2rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    position: relative;
-    border-left: 3px solid var(--string-color);
-}
-
-.achievements-list li::before {
-    content: "✓";
-    position: absolute;
-    left: 0.75rem;
-    color: var(--function-color);
-}
-
-/* Footer Styles */
-footer {
-    background-color: var(--terminal-color);
-    color: var(--text-color);
-    text-align: center;
-    padding: 1.5rem 0;
-    margin-top: 2rem;
-    border-top: 1px solid #444;
-}
-
-footer p::before {
-    content: "if __name__ == '__main__': ";
-    color: var(--keyword-color);
-}
-
-/* Terminal prompt at bottom */
-.terminal-prompt {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: var(--terminal-color);
-    color: var(--text-color);
-    padding: 10px 20px;
-    font-family: 'JetBrains Mono', monospace;
-    border-top: 1px solid #444;
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-}
-
-.prompt-user {
-    color: #27c93f;
-    margin-right: 10px;
-}
-
-.prompt-location {
-    color: var(--highlight-color);
-    margin-right: 10px;
-}
-
-.prompt-symbol {
-    color: var(--text-color);
-    margin-right: 10px;
-}
-
-.blinking-cursor {
-    display: inline-block;
-    width: 8px;
-    height: 15px;
-    background-color: var(--text-color);
-    animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-/* Code typing effect */
-.typing-effect {
-    overflow: hidden;
-    white-space: nowrap;
-    animation: typing 3.5s steps(40, end);
-}
-
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-/* Syntax highlighting classes */
-.keyword {
-    color: var(--keyword-color);
-}
-
-.function {
-    color: var(--function-color);
-}
-
-.string {
-    color: var(--string-color);
-}
-
-.variable {
-    color: var(--variable-color);
-}
-
-.comment {
-    color: var(--comment-color);
-    font-style: italic;
-}
-
-.decorator {
-    color: var(--decorator-color);
-}
-
-.class {
-    color: var(--class-color);
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-    body {
-        font-size: 14px;
-    }
-    
-    .container {
-        padding: 0 10px;
-        width: 100%;
-        overflow-x: hidden;
-    }
-    
-    .contact-info {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-        margin-left: 0;
-        width: 100%;
-    }
-    
-    .contact-info p {
-        margin-left: 0;
-        font-size: 0.9rem;
-        width: 100%;
-        text-align: left;
-        padding-left: 20px;
-    }
-    
-    header h1 {
-        font-size: 1.6rem;
-    }
-    
-    header h1::before, header h1::after {
-        font-size: 1.4rem;
-    }
-    
-    /* Responsive navigation */
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    nav li {
-        padding: 0.5rem 0.3rem;
-    }
-    
-    nav a {
-        font-size: 0.9rem;
-        padding: 5px 8px;
-    }
-    
-    /* Improve text wrapping in job items */
-    .job li, .education-item li, .achievements-list li {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-    
-    .job-meta, .edu-meta {
-        flex-direction: column;
-        gap: 0.3rem;
-    }
-    
-    .job, .education-item {
-        padding: 1rem;
-    }
-    
-    .job ul {
-        padding-left: 1.2rem;
-    }
-    
-    /* Make code blocks better on mobile */
-    .code-block {
-        padding: 0.75rem;
-        font-size: 0.8rem;
-        line-height: 1.3;
-    }
-    
-    pre {
-        font-size: 0.8rem;
-    }
-    
-    /* Improve section titles for mobile */
-    .section h2 {
-        font-size: 1.3rem;
-        word-break: keep-all;
-        white-space: nowrap;
-    }
-    
-    .section h2::before, .section h2::after {
-        font-size: 1.1rem;
-    }
-}
-
-/* Small phone screens */
-@media (max-width: 480px) {
-    body {
-        font-size: 13px;
-    }
-    
-    .container {
-        padding: 0 8px;
-    }
-    
-    nav li {
-        padding: 0.3rem 0.2rem;
-    }
-    
-    nav a {
-        font-size: 0.8rem;
-        padding: 3px 5px;
-    }
-    
-    header h1 {
-        font-size: 1.4rem;
-    }
-    
-    header h1::before, header h1::after {
-        font-size: 1.2rem;
-    }
-    
-    .job h3, .education-item h3 {
-        font-size: 1rem;
-    }
-    
-    .contact-info::before {
-        font-size: 0.9rem;
-    }
-    
-    .terminal-title {
-        font-size: 0.7rem;
-    }
-    
-    /* Smaller text for job descriptions */
-    .job li {
-        font-size: 0.85rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    /* Adjust code blocks for very small screens */
-    .code-block {
-        padding: 0.5rem;
-        font-size: 0.7rem;
-    }
-    
-    pre {
-        font-size: 0.7rem;
-    }
-    
-    /* Hide decorative elements that take space */
-    .job::before, .education-item::before {
-        display: none;
-    }
-    
-    /* Make the line numbers smaller */
-    .line-number {
-        min-width: 18px;
-        padding-right: 0.3rem;
-        font-size: 0.7rem;
-    }
-}
-
-/* Ultra small screens */
-@media (max-width: 320px) {
-    body {
-        font-size: 12px;
-    }
-    
-    .section h2::before, .section h2::after {
-        content: none;
-    }
-    
-    .contact-info::before {
-        content: none;
-    }
-    
-    header h1::before, header h1::after {
-        content: none;
-    }
-    
-    nav a::before {
-        content: none;
-    }
-    
-    /* Stack navigation items for ultra small screens */
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .code-block {
-        font-size: 0.65rem;
-    }
-    
-    /* Further reduce line height */
-    .job li, .education-item li, .achievements-list li {
-        line-height: 1.3;
-    }
+:root{
+  /* white / grey theme */
+  --bg: #ffffff; /* page background */
+  --card: #f5f7fa; /* card background */
+  --muted: #6b7280; /* muted text */
+  --accent: #4b5563; /* subtle accent (dark grey) */
+  --text: #0f1724; /* primary text (near-black) */
+  --glass: rgba(15,23,36,0.03);
+}
+:root{
+  /* user palette: #E3FDFD, #CBF1F5, #A6E3E9, #71C9CE */
+  --p1: #E3FDFD; /* lightest */
+  --p2: #CBF1F5;
+  --p3: #A6E3E9;
+  --accent: #71C9CE; /* main accent */
+
+  --bg: var(--p1);
+  --card: var(--p2);
+  --muted: #3f6b6d; /* darker muted that pairs with palette */
+  --text: #06292b; /* near-black teal for contrast */
+  --glass: rgba(7,41,43,0.04);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+html { scroll-behavior: smooth; }
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: linear-gradient(180deg,var(--bg), #f7f8fa);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.6;
+  padding:2rem;
+}
+.container{max-width:900px;margin:0 auto}
+.site-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem}
+.brand{display:flex;align-items:center;gap:0.75rem}
+.logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#eef2f7,#e6e9ee);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--text)}
+.logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--p2),var(--p3));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--text)}
+.title{font-size:1.25rem;font-weight:700}
+.subtitle{color:var(--muted);font-size:0.95rem}
+.nav a{color:var(--muted);text-decoration:none;margin-left:1rem}
+.hero{background:var(--glass);padding:1.25rem;border-radius:12px;margin-bottom:1.5rem}
+.posts{display:block;gap:1rem}
+
+/* Make the blogs section match the hero's width and rounded background */
+.blogs{background:var(--glass);padding:1.25rem;border-radius:12px;margin-bottom:1.5rem}
+
+/* Ensure each post row is a rounded, full-width card inside the blogs section */
+.blogs .post-card{background:var(--card);padding:1.25rem;border-radius:12px;border:1px solid rgba(113,201,206,0.12);margin-bottom:1rem;box-shadow:0 6px 18px rgba(113,201,206,0.08);transition:transform 150ms ease,box-shadow 150ms ease}
+.blogs .post-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(113,201,206,0.12)}
+.blogs .post-card{cursor:pointer}
+.blogs .post-card h2{margin:0 0 0.25rem 0;font-size:1.125rem}
+.blogs .post-card .meta{margin-bottom:0.5rem;font-size:0.88rem}
+.blogs .post-card .excerpt{margin-top:0.5rem;color:var(--text);opacity:0.95}
+.blogs .post-card .read-more{color:var(--accent);font-weight:600}
+.blog-card{background:var(--card);padding:1rem;border-radius:12px;border:1px solid rgba(15,23,36,0.06)}
+.blog-card{background:var(--card);padding:1rem;border-radius:12px;border:1px solid rgba(113,201,206,0.12)}
+.blog-card h2{margin:0 0 0.25rem 0}
+.meta{color:var(--muted);font-size:0.9rem;margin-bottom:0.5rem;display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap}
+.excerpt{color:var(--text);opacity:0.95;margin-top:0.25rem}
+.read-more{display:inline-block;margin-top:0.75rem;color:var(--accent);text-decoration:none}
+.tags{display:inline-flex;gap:0.375rem;align-items:center}
+.tag{background:rgba(15,23,36,0.04);color:var(--accent);padding:0.18rem 0.5rem;border-radius:999px;font-size:0.8rem}
+.tag{background:rgba(113,201,206,0.18);color:var(--accent);padding:0.18rem 0.5rem;border-radius:999px;font-size:0.8rem}
+footer{margin-top:3rem;color:var(--muted);font-size:0.9rem;text-align:center}
+
+/* Back link on post page */
+.back-link{margin:2rem 0 3.5rem 0}
+.back-link a{color:var(--muted);text-decoration:none}
+
+@media(min-width:720px){
+  /* keep single-column row-by-row cards per request */
+  .posts{display:block}
+}
+
+/* Resume specific tweaks */
+.resume-nav{display:flex;gap:0.75rem;margin:0.5rem 0 1rem 0}
+.resume-nav a{background:transparent;padding:0.35rem 0.6rem;border-radius:8px;color:var(--accent);text-decoration:none;border:1px solid rgba(113,201,206,0.12)}
+.resume-nav a:hover{background:rgba(113,201,206,0.06)}
+
+/* Denser resume spacing */
+.blog-article{padding:1.25rem}
+.blog-article h2{margin-top:1rem;margin-bottom:0.5rem}
+.blog-article h3{margin-top:0.5rem;margin-bottom:0.25rem}
+.blog-article ul{margin-top:0.25rem;margin-bottom:0.5rem;padding-left:1.1rem}
+
+/* Resume-specific article overrides to avoid layout breaks */
+.resume-article{max-width:100%;background:transparent;padding:0;margin:0}
+.resume-article .resume-columns{gap:1.25rem}
+.resume-article .resume-side{min-width:180px}
+.resume-article .resume-main{min-width:0}
+
+@media(max-width:520px){
+  .container{padding:1rem}
+  .logo{width:44px;height:44px}
+  .title{font-size:1rem}
+  .blog-article{padding:0.9rem}
+}
+
+/* Print-friendly rules */
+@media print{
+  body{padding:0;background:white;color:black}
+  .site-header, .resume-nav, .nav { display:none }
+  .container{max-width:720px;margin:0}
+  .blog-article{border:none;box-shadow:none;padding:0}
+  a::after{content:""}
+}
+
+/* Resume two-column layout */
+.resume-header{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin-bottom:0.75rem}
+.resume-header h1{margin:0;font-size:1.4rem}
+.resume-header{padding-bottom:0.5rem;border-bottom:1px solid rgba(15,23,36,0.04)}
+.resume-contact{font-size:0.95rem;text-align:right;color:var(--muted)}
+.resume-columns{display:grid;grid-template-columns: 1fr 260px;gap:1rem}
+.resume-main{min-width:0}
+.resume-side{background:var(--card);padding:0.75rem;border-radius:10px;border-left:1px solid rgba(113,201,206,0.06)}
+.resume-side .tag{display:inline-block;margin:0.25rem 0.35rem}
+.resume-side h3{margin-top:0}
+
+.tag{background:rgba(7,41,43,0.06);color:var(--text);padding:0.22rem 0.6rem;border-radius:999px;font-size:0.86rem;max-width:100%;overflow-wrap:anywhere;font-weight:600;border:1px solid rgba(7,41,43,0.06)}
+
+/* Make tags wrap in the sidebar to avoid horizontal overflow */
+.resume-side .tags{display:flex;flex-wrap:wrap;gap:0.35rem;align-items:flex-start}
+.resume-side .tag{white-space:normal}
+
+/* Avoid breaking sections across pages when printing */
+.page-break{page-break-inside:avoid;break-inside:avoid;}
+.resume-section{margin-bottom:0.75rem}
+
+/* Section dividers for clarity */
+.resume-main .resume-section:not(:first-child){
+  border-top: 1px solid rgba(15,23,36,0.04);
+  padding-top: 0.8rem;
+  margin-top: 0.8rem;
+}
+.resume-side .resume-section:not(:first-child){
+  border-top: 1px dashed rgba(15,23,36,0.03);
+  padding-top: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+/* Make headings a little more prominent for scanning */
+.resume-main h2{font-size:1.05rem;margin-bottom:0.4rem}
+.resume-main h3{font-size:0.95rem;margin-bottom:0.25rem;color:var(--accent)}
+
+@media(max-width:900px){
+  .resume-columns{grid-template-columns: 1fr}
+  .resume-side{border-left:none;padding-top:0}
+  .resume-contact{text-align:left}
+}
+
+@media print{
+  /* Prefer A4/Letter: set size in printed pages if the browser supports it */
+  @page { size: A4 portrait; margin: 12mm; }
+  /* Some print dialogs accept 'letter' - keep margins small to fit either */
+  /* If your printer is Letter, the browser will scale. */
+  @page :left { margin: 12mm; }
+  @page :right { margin: 12mm; }
+  .resume-columns{grid-template-columns: 1fr}
+  .resume-side{display:block;border-left:none}
+  .resume-header{display:block;margin-bottom:0.25rem}
+  .resume-contact{float:right}
+  /* Prevent big blocks from being split */
+  .resume-main, .resume-side { page-break-inside: avoid; }
+  .page-break { page-break-after: always; break-after: page; }
+  /* Avoid breaking immediately after headings */
+  h2, h3 { page-break-after: avoid; page-break-inside: avoid; break-inside: avoid-column; }
+  /* Slightly reduce font size to fit more content on a page */
+  body { font-size: 12.5px; }
+}
+
+/* Pagination */
+.pagination{display:flex;gap:0.5rem;align-items:center;justify-content:center;margin-top:1rem}
+.pagination .page-btn{background:transparent;border:1px solid rgba(15,23,36,0.06);color:var(--text);padding:0.4rem 0.6rem;border-radius:8px;cursor:pointer}
+.pagination .page-btn{background:transparent;border:1px solid rgba(113,201,206,0.12);color:var(--text);padding:0.4rem 0.6rem;border-radius:8px;cursor:pointer}
+.pagination .page-btn:hover{border-color:rgba(15,23,36,0.12)}
+.pagination .page-btn:hover{border-color:rgba(113,201,206,0.2)}
+.pagination .page-btn:disabled{opacity:0.4;cursor:default}
+.pagination .page-btn.active{background:rgba(15,23,36,0.04);border-color:rgba(15,23,36,0.08);color:var(--accent)}
+.pagination .page-btn.active{background:rgba(113,201,206,0.12);border-color:rgba(113,201,206,0.2);color:var(--accent)}
+.pagination .dots{color:var(--muted);padding:0 0.25rem}
+
+/* Post page */
+.blog-article{max-width:900px;margin:0 auto;background:var(--card);padding:2rem;border-radius:12px;border:1px solid rgba(15,23,36,0.06)}
+.blog-article{max-width:900px;margin:0 auto;background:var(--card);padding:2rem;border-radius:12px;border:1px solid rgba(113,201,206,0.12)}
+.blog-article h1{margin-top:0}
+.blog-content p{color:var(--text);opacity:0.98}
+
+/* Post page rounded container matching the blog cards */
+#post{max-width:900px;margin:0 auto}
+#post-meta{color:var(--muted);margin-bottom:0.5rem}
+#post-content{background:var(--card);padding:1.75rem;border-radius:12px;border:1px solid rgba(113,201,206,0.12);box-shadow:0 12px 32px rgba(113,201,206,0.08)}
+#post-content h1{margin-top:0}
+#post-content p{color:var(--text);line-height:1.7}
+
+/* Strong override to prevent .blog-article post styles from breaking the resume layout */
+
+.blog-article.resume-article, .resume-article.blog-article {
+  max-width: 100% !important;
+  margin: 0 !important;
+  /* simple stable card look for the resume */
+  background: var(--card) !important;
+  padding: 1rem !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(113,201,206,0.08) !important;
+  box-shadow: 0 10px 26px rgba(7,41,43,0.04) !important;
+}
+
+/* Ensure resume internal containers keep their intended spacing */
+.resume-article .resume-columns{grid-template-columns: 1fr 260px;}
+.resume-article .resume-side{min-width:180px}
+
+/* Remove resume visual box when printing */
+@media print {
+  .blog-article.resume-article, .resume-article.blog-article { background: transparent !important; box-shadow: none !important; padding: 0 !important; border: none !important; }
 }
