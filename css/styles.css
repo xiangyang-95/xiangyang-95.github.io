@@ -75,6 +75,30 @@ footer{margin-top:3rem;color:var(--muted);font-size:0.9rem;text-align:center}
   .posts{display:block}
 }
 
+/* Mobile adjustments: stack header, improve touch targets, and reduce padding for narrow screens */
+@media(max-width:720px){
+  .site-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:0.6rem;
+  }
+  .brand{width:100%;display:flex;align-items:center;justify-content:flex-start;gap:0.6rem}
+  .nav{display:flex;gap:0.5rem;width:100%;justify-content:flex-end}
+  .nav a{margin-left:0;padding:0.45rem 0.6rem;border-radius:8px;color:var(--muted);text-decoration:none}
+  .nav a:hover{background:rgba(7,41,43,0.03)}
+
+  /* Reduce outer padding so content fits mobile viewports better */
+  body{padding:1rem}
+  .container{padding:0 0.5rem}
+
+  /* Slightly smaller logo and tighter cards on mobile */
+  .logo{width:48px;height:48px}
+  .title{font-size:1rem}
+  .hero h1{font-size:1.2rem}
+  .blogs{padding:1rem}
+  .blogs .post-card{padding:0.9rem}
+}
+
 /* Resume specific tweaks */
 .resume-nav{display:flex;gap:0.75rem;margin:0.5rem 0 1rem 0}
 .resume-nav a{background:transparent;padding:0.35rem 0.6rem;border-radius:8px;color:var(--accent);text-decoration:none;border:1px solid rgba(113,201,206,0.12)}
@@ -113,7 +137,7 @@ footer{margin-top:3rem;color:var(--muted);font-size:0.9rem;text-align:center}
 .resume-header h1{margin:0;font-size:1.4rem}
 .resume-header{padding-bottom:0.5rem;border-bottom:1px solid rgba(15,23,36,0.04)}
 .resume-contact{font-size:0.95rem;text-align:right;color:var(--muted)}
-.resume-columns{display:grid;grid-template-columns: 1fr 260px;gap:1rem}
+.resume-columns{display:grid;grid-template-columns: 1fr auto;gap:1rem}
 .resume-main{min-width:0}
 .resume-side{background:var(--card);padding:0.75rem;border-radius:10px;border-left:1px solid rgba(113,201,206,0.06)}
 .resume-side .tag{display:inline-block;margin:0.25rem 0.35rem}
@@ -146,9 +170,20 @@ footer{margin-top:3rem;color:var(--muted);font-size:0.9rem;text-align:center}
 .resume-main h3{font-size:0.95rem;margin-bottom:0.25rem;color:var(--accent)}
 
 @media(max-width:900px){
+  /* Collapse resume into one column on narrower screens and stack header */
   .resume-columns{grid-template-columns: 1fr}
   .resume-side{border-left:none;padding-top:0}
   .resume-contact{text-align:left}
+
+  /* Stack name and contact and ensure contact sits under the name for better flow */
+  .resume-header{flex-direction:column;align-items:flex-start;gap:0.4rem}
+  .resume-contact{order:2;width:100%}
+
+  /* Reduce visual weight of the sidebar on small screens (if present) */
+  .resume-side{background:transparent;padding:0;border-left:none;box-shadow:none}
+
+  /* Force long emails/links to wrap instead of causing overflow */
+  .resume-contact a, .resume-main a{word-break:break-word;overflow-wrap:anywhere}
 }
 
 @media print{
@@ -209,7 +244,7 @@ footer{margin-top:3rem;color:var(--muted);font-size:0.9rem;text-align:center}
 }
 
 /* Ensure resume internal containers keep their intended spacing */
-.resume-article .resume-columns{grid-template-columns: 1fr 260px;}
+.resume-article .resume-columns{grid-template-columns: 1fr auto;}
 .resume-article .resume-side{min-width:180px}
 
 /* Remove resume visual box when printing */
