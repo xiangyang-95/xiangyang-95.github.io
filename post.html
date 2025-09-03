@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Post - Xiang Yang's Blog</title>
     <link rel="stylesheet" href="css/styles.css">
+    <!-- GitHub-style Markdown CSS for GitHub-like rendering -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown.min.css" referrerpolicy="no-referrer" />
+    <!-- Syntax highlight theme matching GitHub -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" referrerpolicy="no-referrer" />
     <meta name="description" content="Blog post">
 </head>
 
@@ -27,11 +31,15 @@
         <main>
             <article id="post">
                 <div id="post-meta"></div>
-                <div id="post-content">Loading post…</div>
+                <div id="post-content" class="markdown-body">Loading post…</div>
             </article>
             <p class="back-link"><a href="index.html">← Back to posts</a></p>
         </main>
     </div>
+    <!-- Marked (Markdown parser) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
+    <!-- Highlight.js (syntax highlighting) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" referrerpolicy="no-referrer"></script>
     <script src="js/blogs.js" defer></script>
 </body>
 

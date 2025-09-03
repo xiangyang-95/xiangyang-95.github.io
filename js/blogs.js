@@ -242,12 +242,56 @@
     const url = new URL(location.href);
     const file = url.searchParams.get('file');
     if (file && document.getElementById('post-content')) {
-    const mdPath = 'contents/blogs/' + file.replace(/\.\./g, '');
-        fetchText(mdPath).then(md => {
-            document.getElementById('post-content').innerHTML = mdToHtml(md);
-            document.getElementById('post-meta').textContent = '';
-        }).catch(err => { document.getElementById('post-content').textContent = 'Failed to load post: ' + err.message; });
+        const mdPath = 'contents/blogs/' + file.replace(/\.{2}/g, '');
+        fetchText(mdPath)
+            .then(md => {
+                const container = document.getElementById('post-content');
+                // Prefer Marked if available for GitHub-like rendering; fallback to tiny renderer
+                if (window.marked && typeof window.marked.parse === 'function') {
+                    try {
+                        // enable GFM
+                        window.marked.use({ gfm: true });
+                        container.innerHTML = window.marked.parse(md);
+                    } catch (e) {
+                        container.innerHTML = mdToHtml(md);
+                    }
+                } else {
+                    container.innerHTML = mdToHtml(md);
+                }
+                // Fix relative links/images to point to the blogs folder
+                fixRelativeLinks(container, 'contents/blogs/');
+                // Trigger syntax highlighting if highlight.js is present
+                if (window.hljs && typeof window.hljs.highlightAll === 'function') {
+                    window.hljs.highlightAll();
+                }
+                document.getElementById('post-meta').textContent = '';
+            })
+            .catch(err => {
+                document.getElementById('post-content').textContent = 'Failed to load post: ' + err.message;
+            });
         return;
+    }
+
+    function isAbsoluteUrl(u){ try { return new URL(u, location.href).origin !== location.origin || /^(?:https?:)?\/\//i.test(u); } catch { return false; } }
+    function isHashOrMail(u){ return !u || u.startsWith('#') || u.startsWith('mailto:') || u.startsWith('tel:'); }
+    function fixRelativeLinks(root, base){
+        // anchors
+        const as = root.querySelectorAll('a[href]');
+        as.forEach(a => {
+            const href = a.getAttribute('href');
+            if (isHashOrMail(href) || isAbsoluteUrl(href)) return;
+            // avoid rewriting absolute-rooted urls ("/path")
+            if (href.startsWith('/')) return;
+            a.setAttribute('href', base + href.replace(/^\.\//, ''));
+        });
+        // images
+        const imgs = root.querySelectorAll('img[src]');
+        imgs.forEach(img => {
+            const src = img.getAttribute('src');
+            if (isAbsoluteUrl(src)) return;
+            if (src.startsWith('/')) return;
+            img.setAttribute('src', base + src.replace(/^\.\//, ''));
+        });
     }
 
     // Otherwise render index (paged)
