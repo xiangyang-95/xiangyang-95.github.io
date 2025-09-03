@@ -1,6 +1,12 @@
 {
   "posts": [
     {
+      "file": "intel-gpu-enablement-on-lerobot.md",
+      "title": "0x02 - Intel GPU enablement on LeRobot",
+      "date": "2025-09-04",
+      "tags": ["Robotics", "SmolVLA", "Training", "Intel GPU"]
+    },
+    {
       "file": "hello-readers.md",
       "title": "0x01 - Hello Readers",
       "date": "2025-09-03",
